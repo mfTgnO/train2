@@ -1,7 +1,7 @@
-package sia.ingredientclient.feign;
+package sia.ingredientclient.resttemplate;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,34 +9,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * @Package: sia.ingredientclient.feign
+ * @Package: sia.ingredientclient.resttemplate
  * @Author:
  * @Email:
- * @CreateDate: 2019-04-24 18:57
+ * @CreateDate: 2019-04-25 10:26
  * @Description:
  */
 @Controller
 @RequestMapping("/ingredients")
-@Profile("feign")
+@Conditional(NotFeignAndNotWebClientCondition.class)
 @Slf4j
 public class IngredientController {
-    private IngredientClient client;
+    private IngredientServiceClient client;
 
-    public IngredientController(IngredientClient client) {
+    public IngredientController(IngredientServiceClient client) {
         this.client = client;
     }
 
     @GetMapping
     public String ingredientList(Model model) {
-        log.info("Fetched all ingredients from a Feign client.");
+        log.info("Fetched all ingredients from a RestTemplate-based service.");
         model.addAttribute("ingredients", client.getAllIngredients());
         return "ingredientList";
     }
 
     @GetMapping("/{id}")
     public String ingredientDetailPage(@PathVariable("id") String id, Model model) {
-        log.info("Fetched an ingredient from a Feign client.");
-        model.addAttribute("ingredient", client.getIngredient(id));
+        log.info("Fetched an ingredient from a RestTemplate-based service.");
+        model.addAttribute("ingredient", client.getIngredientById(id));
         return "ingredientDetail";
     }
 }
