@@ -13,7 +13,7 @@ import sia.ingredientclient.Ingredient;
  * @Description:
  */
 @FeignClient("ingredient-service")
-public class IngredientClient {
+public interface IngredientClient {
     @GetMapping("/ingredients/{id}")
     Ingredient getIngredient(@PathVariable("id") String id);
 
