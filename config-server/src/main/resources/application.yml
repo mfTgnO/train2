@@ -14,3 +14,9 @@ spring:
       server:
         git:
           uri: https://github.com/habuma/tacocloud-config
+#        encrypt:
+#          enabled: false
+#          username:
+#          password:
+#          search-paths:
+#          default-label:
