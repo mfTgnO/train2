@@ -1,7 +1,7 @@
 #spring:
 #  profiles:
 #    active:
-#      dev5
+#      '@profile.active@'
 
 tpd:
   peer1Port: 8761
@@ -35,6 +35,12 @@ spring:
 eureka:
   instance:
     # See blog post for details, modify /etc/hosts
+    # 需要配置C:\Windows\System32\drivers\etc\host文件
+    # 127.0.0.1 eureka-peer1
+    # 127.0.0.1 eureka-peer2
+    # terminal启动
+    # $ mvn spring-boot:run -Dspring-boot.run.profiles=peer1
+    # $ mvn spring-boot:run -Dspring-boot.run.profiles=peer2
     hostname: eureka-peer1
     # Either this one or the spring boot name must be the same
     # (it works without setting it too, using the alias UNKNOWN)
