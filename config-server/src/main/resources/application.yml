@@ -12,5 +12,8 @@ spring:
   cloud:
     config:
       server:
+        #        native:
+        #          search-locations: file:///D:/workspace/ws0/train2/config-server/src/main/resources/config/licensingservice/licensingservice.yml
+        #        bootstrap: false
         git:
           uri: https://github.com/habuma/tacocloud-config
