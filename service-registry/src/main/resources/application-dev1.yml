@@ -1,6 +1,9 @@
+server:
+  port: 8761
 eureka:
   instance:
     hostname: localhost
+    prefer-ip-address: true # 优先使用id地址注册而不是使用hostname
   client:
     fetch-registry: false
     register-with-eureka: false
@@ -8,5 +11,4 @@ eureka:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
   server:
     enable-self-preservation: false
-server:
-  port: 8761
+    wait-time-in-ms-when-sync-empty: 5
