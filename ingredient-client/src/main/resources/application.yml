@@ -1,3 +1,3 @@
 spring:
-  application:
-    name: ingredient-client
+  profiles:
+    active: dev1
