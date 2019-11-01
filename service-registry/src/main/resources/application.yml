@@ -1,11 +1,7 @@
-#spring:
-#  profiles:
-#    active:
-#      '@profile.active@'
-
 tpd:
   peer1Port: 8761
   peer2Port: 8762
+  peer3Port: 8763
 
 management:
   endpoint:
@@ -17,6 +13,16 @@ management:
   endpoints:
     web:
       base-path: /
+      exposure:
+        include: '*'
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-peer1:${tpd.peer1Port}/eurekak,http://eureka-peer2:${tpd.peer2Port}/eureka,http://eureka-peer3:${tpd.peer3Port}/eureka
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
       # By default, only 'health' and 'info' are accessible via web
       exposure:
         include: '*'
@@ -60,10 +66,20 @@ eureka:
   instance:
     hostname: eureka-peer2
     appname: eureka-cluster
+server:
+  port: ${tpd.peer2Port}
+
+---
+spring:
+  profiles: peer3
+eureka:
+  instance:
+    hostname: eureka-peer3
+    appname: eureka-cluster
+server:
+  port: ${tpd.peer3Port}
   client:
     serviceUrl:
       defaultZone: http://eureka-peer1:${tpd.peer1Port}/eureka
     register-with-eureka: true
     fetch-registry: true
-server:
-  port: ${tpd.peer2Port}

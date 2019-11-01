@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: ingredient-service
+  cloud:
+    config:
+      enabled: true
 
 #
 # This sets the location of the Eureka server. The config shown here differs
@@ -17,6 +20,8 @@ spring:
 # to reference a local instance isn't strictly required.
 #
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/

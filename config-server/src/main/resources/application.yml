@@ -7,7 +7,7 @@ server:
 # my GitHub org/user where there is an actual "tacocloud-config" repository.
 # You are welcome to continue using this repository as a source of configuration
 # data, but if you want to play around and tweak the configuration, you'll
-# need to setup your own configuration repository (or fork mine). 
+# need to setup your own configuration repository (or fork mine).
 spring:
   cloud:
     config:
